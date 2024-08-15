@@ -19,6 +19,7 @@
     <!--    stirng for loginScreen-->
     <string name="title_Login_or_signup">Login or Signup</string>
     <string name="desc_login_or_signup">Please login or signup to access your best anime </string>
+    <string name="login_with">Continue with</string>
 
     <!--    string for homeScreen-->
     <string name="title_ongoing_anime">Ongoing Anime</string>
@@ -36,6 +37,10 @@
 
     <!--    string for profile screen-->
     <string name="btn_logout">Logout</string>
+
+<!--    web client-->
+    <string name="web_client_id">862392428062-4srph5kdb07ol2qorjiidftatfcmusim.apps.googleusercontent.com</string>
+    <string name="cover_image_login">cover_image_login</string>
 
 
 </resources>

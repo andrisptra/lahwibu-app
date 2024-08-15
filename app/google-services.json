@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "862392428062",
+    "project_id": "lahwibu-de619",
+    "storage_bucket": "lahwibu-de619.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862392428062:android:4320b870c7a5cacfd4f00f",
+        "android_client_info": {
+          "package_name": "com.example.lahwibu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862392428062-7fuji78enefb7fbjb3ufqipg9o41t3ef.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lahwibu",
+            "certificate_hash": "43af85f977870fb7ea0338350946a2c5da9bcab0"
+          }
+        },
+        {
+          "client_id": "862392428062-4srph5kdb07ol2qorjiidftatfcmusim.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpFlU8U7McJeSQg6vp_UgW_BimBjebK4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862392428062-4srph5kdb07ol2qorjiidftatfcmusim.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
