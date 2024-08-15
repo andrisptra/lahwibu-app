@@ -1,0 +1,41 @@
+<resources>
+    <!--    string for bottomMneu-->
+    <string name="app_name">LahWibu</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_list">List</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!--    String for onboardingScreen-->
+    <string name="title_welcome_to_lahwibu">Welcome To LahWibu</string>
+    <string name="desc_welcome_to_lahwibu">Welcome to LahWibu, your ultimate gateaway to endles anime adventure, where every series and movies brings a new world to explore and enjoy</string>
+    <string name="title_select_your_favorite">Select Your Favorite</string>
+    <string name="desc_select_your_favorite">Add favorite anime to keep track of what you love. Easily organize your favorite shows and always know where you left off</string>
+    <string name="title_stay_update">Stay Update</string>
+    <string name="desc_stay_update">Stay ahead with LahWibu and never miss new episodes and releases. Get instant update and be the first to watch the latest in the anime world!</string>
+
+    <!--    stirng for loginScreen-->
+    <string name="title_Login_or_signup">Login or Signup</string>
+    <string name="desc_login_or_signup">Please login or signup to access your best anime </string>
+
+    <!--    string for homeScreen-->
+    <string name="title_ongoing_anime">Ongoing Anime</string>
+    <string name="title_complete_anime">Complete Anime</string>
+
+    <!--     string for searchScreen-->
+    <string name="title_not_found">No Result Found</string>
+    <string name="desc_not_found">We can\'t find any Anime your search</string>
+    <!--    string for detail anime-->
+    <string name="btn_play">Play</string>
+    <string name="title_sinopsis">Sinopsis</string>
+    <string name="title_studio">Studio</string>
+    <string name="title_episode">Episode</string>
+    <string name="title_recomendation">Recomendation</string>
+
+    <!--    string for profile screen-->
+    <string name="btn_logout">Logout</string>
+
+
+</resources>
