@@ -3,11 +3,11 @@ package com.example.lahwibu.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.lahwibu.data.repository.UserRepository
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(private val repository: UserRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
+    fun getOngoingAnime(page:String) = repository.getOngoingAnime(page)
+    fun getCompletedAnime(page: String) = repository.getCompletedAnime(page)
+
 }

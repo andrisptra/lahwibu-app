@@ -1,13 +1,8 @@
 package com.example.lahwibu.ui.search
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.lahwibu.data.repository.UserRepository
 
-class SearchViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is Search Fragment"
-    }
-    val text: LiveData<String> = _text
+class SearchViewModel(private val userRepository: UserRepository) : ViewModel() {
+    fun searchAnime(query: String) = userRepository.searchAnime(query)
 }
