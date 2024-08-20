@@ -57,6 +57,26 @@ class UserRepository private constructor(
         }
     }
 
+    fun getDetailAnime(animeCode:String,id:String)= liveData{
+        emit(Result.Loading)
+        try {
+            val successResponse = apiService.getDetailAnime(animeCode,id)
+            emit(Result.Success(successResponse))
+        }catch (e:Exception){
+            Log.e(this@UserRepository.toString(),e.message.toString())
+        }
+    }
+
+    fun getDetailEpisode(animeCode:String,id:String,eps:String)= liveData {
+        emit(Result.Loading)
+        try {
+            val successResponse = apiService.getDetailEpisode(animeCode,id,eps)
+            emit(Result.Success(successResponse))
+        }catch (e:Exception){
+            Log.e(this@UserRepository.toString(),e.message.toString())
+        }
+    }
+
 
 
     companion object {

@@ -1,14 +1,17 @@
 package com.example.lahwibu.ui.search
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.lahwibu.data.response.DataItemSearch
 import com.example.lahwibu.databinding.FragmentSearchBinding
+import com.example.lahwibu.ui.detail.DetailAnimeActivity
 import com.example.lahwibu.utils.Result
 import com.example.lahwibu.utils.ViewModelFactory
 
@@ -77,9 +80,18 @@ class SearchFragment : Fragment() {
         }
         adapter.setOnItemClickCallback(object : SearchListAdapter.OnItemClickCallback {
             override fun onItemClicked(data: DataItemSearch) {
+                data.animeCode?.let { showToast(it) }
+                val intent = Intent(requireActivity(), DetailAnimeActivity::class.java)
+                intent.putExtra(DetailAnimeActivity.ANIME_CODE, data.animeCode)
+                intent.putExtra(DetailAnimeActivity.ANIME_ID, data.animeId)
+                startActivity(intent)
             }
 
         })
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

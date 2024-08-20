@@ -1,5 +1,6 @@
 package com.example.lahwibu.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.lahwibu.data.response.DataItemCompleted
 import com.example.lahwibu.data.response.DataItemOngoing
+import com.example.lahwibu.data.response.DetailAnimeResponse
 import com.example.lahwibu.databinding.FragmentHomeBinding
+import com.example.lahwibu.ui.detail.DetailAnimeActivity
 import com.example.lahwibu.utils.Result
 import com.example.lahwibu.utils.ViewModelFactory
 
@@ -103,6 +106,10 @@ class HomeFragment : Fragment() {
         adapter.setOnItemClickCallback(object : OngoingListAdapter.OnItemCLickCallback {
             override fun onItemClicked(data: DataItemOngoing) {
                 data.title?.let { showToast(it) }
+                val intent = Intent(requireActivity(), DetailAnimeActivity::class.java)
+                intent.putExtra(DetailAnimeActivity.ANIME_CODE,data.animeCode)
+                intent.putExtra(DetailAnimeActivity.ANIME_ID,data.animeId)
+                startActivity(intent)
             }
 
         })
@@ -117,9 +124,13 @@ class HomeFragment : Fragment() {
             rvAnimeListCompleted.adapter = adapter
             rvAnimeListCompleted.isNestedScrollingEnabled = false
         }
-        adapter.setOnItemClickCallback(object : CompletedListAdapter.OnItemClickCallback{
+        adapter.setOnItemClickCallback(object : CompletedListAdapter.OnItemClickCallback {
             override fun onItemClicked(data: DataItemCompleted) {
                 data.title?.let { showToast(it) }
+                val intent = Intent(requireActivity(), DetailAnimeActivity::class.java)
+                intent.putExtra(DetailAnimeActivity.ANIME_CODE,data.animeCode)
+                intent.putExtra(DetailAnimeActivity.ANIME_ID,data.animeId)
+                startActivity(intent)
             }
         })
     }
@@ -144,4 +155,5 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

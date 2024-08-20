@@ -70,5 +70,15 @@ dependencies {
 //    glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
+//    exoplayer
+    implementation("androidx.media3:media3-exoplayer:1.1.0")
+    implementation("androidx.media3:media3-ui:1.1.0")
+    implementation("androidx.media3:media3-session:1.1.0")
+
+//    pager#
+    implementation("androidx.paging:paging-runtime-ktx:3.1.0")
+
+
+
 
 }

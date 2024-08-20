@@ -31,9 +31,11 @@
     <!--    string for detail anime-->
     <string name="btn_play">Play</string>
     <string name="title_sinopsis">Sinopsis</string>
+    <string name="desc_sinopsis">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
     <string name="title_studio">Studio</string>
     <string name="title_episode">Episode</string>
     <string name="title_recomendation">Recomendation</string>
+    <string name="episode_list">Episode %d</string>
 
     <!--    string for profile screen-->
     <string name="btn_logout">Logout</string>
@@ -44,6 +46,9 @@
     <string name="genre_list">Action, Drama, Comedy</string>
     <string name="anime_title">Souso no frieren</string>
     <string name="see_all">see all</string>
+    <string name="rating_text">8.5</string>
+    <string name="type">TV</string>
+    <string name="status">Ongoing</string>
 
 
 </resources>

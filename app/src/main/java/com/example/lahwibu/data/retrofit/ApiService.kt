@@ -1,9 +1,12 @@
 package com.example.lahwibu.data.retrofit
 
 import com.example.lahwibu.data.response.CompletedAnimeResponse
+import com.example.lahwibu.data.response.DetailAnimeResponse
+import com.example.lahwibu.data.response.DetailEpisodeResponse
 import com.example.lahwibu.data.response.OngoingAnimeResponse
 import com.example.lahwibu.data.response.SearchAnimeResponse
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -22,4 +25,18 @@ interface ApiService {
     suspend fun getCompletedAnime(
         @Query("page") page: String
     ): CompletedAnimeResponse
+
+    @GET("anime/{code}/{id}")
+    suspend fun getDetailAnime(
+        @Path("code") code: String,
+        @Path("id") id:String
+    ): DetailAnimeResponse
+
+    @GET("anime/{code}/{id}/episode/{eps}")
+    suspend fun getDetailEpisode(
+        @Path("code") code: String,
+        @Path("id") id:String,
+        @Path("eps") eps: String
+    ): DetailEpisodeResponse
+
 }

@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.lahwibu.data.di.Injection
 import com.example.lahwibu.data.repository.UserRepository
+import com.example.lahwibu.ui.detail.DetailAnimeViewModel
+import com.example.lahwibu.ui.episode.EpisodeDetailViewModel
 import com.example.lahwibu.ui.home.HomeViewModel
 import com.example.lahwibu.ui.search.SearchViewModel
 
@@ -17,7 +19,10 @@ class ViewModelFactory private constructor(private val mRepository: UserReposito
             HomeViewModel(mRepository) as T
         } else if (modelClass.isAssignableFrom(SearchViewModel::class.java)) {
             SearchViewModel(mRepository) as T
-
+        } else if (modelClass.isAssignableFrom(DetailAnimeViewModel::class.java)) {
+            DetailAnimeViewModel(mRepository) as T
+        } else if (modelClass.isAssignableFrom(EpisodeDetailViewModel::class.java)) {
+            EpisodeDetailViewModel(mRepository) as T
         } else {
             throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
