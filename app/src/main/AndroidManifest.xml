@@ -16,6 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LahWibu"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.detaillist.DetailListOngoingActivity"
+            android:exported="false"
+            android:label="@string/title_activity_detail_list"
+            android:theme="@style/Theme.LahWibu" />
+
         <service
             android:name=".utils.PlaybackService"
             android:enabled="true"

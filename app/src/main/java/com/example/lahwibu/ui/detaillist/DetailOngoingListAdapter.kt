@@ -1,4 +1,4 @@
-package com.example.lahwibu.ui.home
+package com.example.lahwibu.ui.detaillist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,8 +12,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.lahwibu.data.response.DataItemOngoing
 import com.example.lahwibu.databinding.CardListAnimeBinding
 
-class OngoingListAdapter :
-    ListAdapter<DataItemOngoing, OngoingListAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class DetailOngoingListAdapter :
+    PagingDataAdapter<DataItemOngoing, DetailOngoingListAdapter.MyViewHolder>(DIFF_CALLBACK) {
     private lateinit var onItemClickCallback: OnItemCLickCallback
     fun setOnItemClickCallback(onItemClickCallback: OnItemCLickCallback) {
         this.onItemClickCallback = onItemClickCallback
@@ -26,9 +26,9 @@ class OngoingListAdapter :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val animeList = getItem(position)
+        val animeList = getItem(position)!!
         holder.bind(animeList)
-        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(animeList)}
+        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(animeList) }
     }
 
     class MyViewHolder(private val binding: CardListAnimeBinding) :

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class OngoingAnimeResponse(
 
 	@field:SerializedName("data")
-	val data: List<DataItemOngoing?>? = null,
+	val data: List<DataItemOngoing> = emptyList(),
 
 	@field:SerializedName("nextPage")
 	val nextPage: Boolean? = null,
