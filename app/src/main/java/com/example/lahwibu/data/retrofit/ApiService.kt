@@ -14,11 +14,18 @@ interface ApiService {
     @GET("anime/search")
     suspend fun searchAnime(
         @Query("query") query: String
+
     ): SearchAnimeResponse
 
     @GET("anime/ongoing")
     suspend fun getOngoingAnime(
-        @Query("page") page: String
+        @Query("order_by") order: String
+    ): OngoingAnimeResponse
+
+    @GET("anime/ongoing")
+    suspend fun getOngoingAnimeAll(
+        @Query("page") page: Int,
+        @Query("order_by") order: String
     ): OngoingAnimeResponse
 
     @GET("anime/finished")
@@ -29,13 +36,13 @@ interface ApiService {
     @GET("anime/{code}/{id}")
     suspend fun getDetailAnime(
         @Path("code") code: String,
-        @Path("id") id:String
+        @Path("id") id: String
     ): DetailAnimeResponse
 
     @GET("anime/{code}/{id}/episode/{eps}")
     suspend fun getDetailEpisode(
         @Path("code") code: String,
-        @Path("id") id:String,
+        @Path("id") id: String,
         @Path("eps") eps: String
     ): DetailEpisodeResponse
 

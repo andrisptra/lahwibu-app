@@ -11,9 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.lahwibu.data.response.DataItemCompleted
 import com.example.lahwibu.data.response.DataItemOngoing
-import com.example.lahwibu.data.response.DetailAnimeResponse
 import com.example.lahwibu.databinding.FragmentHomeBinding
 import com.example.lahwibu.ui.detail.DetailAnimeActivity
+import com.example.lahwibu.ui.detaillist.DetailListOngoingActivity
 import com.example.lahwibu.utils.Result
 import com.example.lahwibu.utils.ViewModelFactory
 
@@ -38,14 +38,20 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getOngoingAnime()
+//        getOngoingAnime()
         getCompletedAnimeList()
+        getOngoingAnime()
+
+        binding.btnSeeAllOngoingAnime.setOnClickListener {
+            val intent = Intent(requireActivity(), DetailListOngoingActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
     private fun getOngoingAnime() {
-        val page = "1"
-        viewModel.getOngoingAnime(page).observe(viewLifecycleOwner) { result ->
+        val order = "popular"
+        viewModel.getOngoingAnime(order).observe(viewLifecycleOwner) { result ->
             if (result != null) {
                 when (result) {
                     is Result.Loading -> {
@@ -96,19 +102,19 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun setAnimeOngoingList(animeList: List<DataItemOngoing?>?) {
+    private fun setAnimeOngoingList(data: List<DataItemOngoing>) {
         val adapter = OngoingListAdapter()
-        adapter.submitList(animeList)
+        adapter.submitList(data)
+        binding.rvAnimeListOngoing.adapter = adapter
         val layoutManager = GridLayoutManager(requireActivity(), 3)
         binding.rvAnimeListOngoing.layoutManager = layoutManager
-        binding.rvAnimeListOngoing.adapter = adapter
         binding.rvAnimeListOngoing.isNestedScrollingEnabled = false
         adapter.setOnItemClickCallback(object : OngoingListAdapter.OnItemCLickCallback {
             override fun onItemClicked(data: DataItemOngoing) {
                 data.title?.let { showToast(it) }
                 val intent = Intent(requireActivity(), DetailAnimeActivity::class.java)
-                intent.putExtra(DetailAnimeActivity.ANIME_CODE,data.animeCode)
-                intent.putExtra(DetailAnimeActivity.ANIME_ID,data.animeId)
+                intent.putExtra(DetailAnimeActivity.ANIME_CODE, data.animeCode)
+                intent.putExtra(DetailAnimeActivity.ANIME_ID, data.animeId)
                 startActivity(intent)
             }
 
@@ -128,8 +134,8 @@ class HomeFragment : Fragment() {
             override fun onItemClicked(data: DataItemCompleted) {
                 data.title?.let { showToast(it) }
                 val intent = Intent(requireActivity(), DetailAnimeActivity::class.java)
-                intent.putExtra(DetailAnimeActivity.ANIME_CODE,data.animeCode)
-                intent.putExtra(DetailAnimeActivity.ANIME_ID,data.animeId)
+                intent.putExtra(DetailAnimeActivity.ANIME_CODE, data.animeCode)
+                intent.putExtra(DetailAnimeActivity.ANIME_ID, data.animeId)
                 startActivity(intent)
             }
         })
