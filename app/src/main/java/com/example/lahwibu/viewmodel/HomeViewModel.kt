@@ -1,4 +1,4 @@
-package com.example.lahwibu.ui.home
+package com.example.lahwibu.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +12,6 @@ import com.example.lahwibu.data.response.DataItemOngoing
 class HomeViewModel(private val repository: UserRepository) : ViewModel() {
 
     fun getOngoingAnime(order: String) = repository.getOngoingAnime(order)
-    fun getCompletedAnime(page: String) = repository.getCompletedAnime(page)
+    fun getCompletedAnime(order: String) = repository.getCompletedAnime(order)
 
 }

@@ -22,8 +22,8 @@
     <string name="login_with">Continue with</string>
 
     <!--    string for homeScreen-->
-    <string name="title_ongoing_anime">Ongoing Anime</string>
-    <string name="title_complete_anime">Complete Anime</string>
+    <string name="title_ongoing_anime">New Update Anime</string>
+    <string name="title_complete_anime">Completed Anime</string>
 
     <!--     string for searchScreen-->
     <string name="title_not_found">No Result Found</string>
@@ -33,6 +33,8 @@
     <string name="title_sinopsis">Sinopsis</string>
     <string name="desc_sinopsis">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
     <string name="title_studio">Studio</string>
+    <string name="rating">PG-13 - Remaja 13 tahun ke atas</string>
+    <string name="genre">Action</string>
     <string name="title_episode">Episode</string>
     <string name="title_recomendation">Recomendation</string>
     <string name="episode_list">Episode %d</string>
@@ -92,6 +94,25 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="retry">Try again</string>
+    <string name="setting">setting</string>
+    <string name="let_s_get_started">Let’s get started</string>
+    <string name="sign_up_or_log_in_to_see_the_best_anime">Sign up or log in to see the best anime</string>
+    <string name="continue_with_email">Continue with email account</string>
+    <string name="continue_with_google">Continue with google</string>
+    <string name="continue_with_facebook">Continue with facebook</string>
+    <string name="watchlist">Watchlist</string>
+    <string name="descending">descending</string>
+    <string name="updated">updated</string>
+    <string name="most_viewed">most viewed</string>
+    <string name="popular">popular</string>
+    <string name="latest">latest</string>
+    <string name="oldest">oldest</string>
+    <string name="ascending">ascending</string>
+    <string name="_00_00">00:00</string>
+    <string name="download">download</string>
+    <string name="quality">Quality</string>
+    <string name="share">share</string>
 
 
 </resources>

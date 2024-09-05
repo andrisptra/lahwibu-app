@@ -1,4 +1,4 @@
-package com.example.lahwibu.ui.search
+package com.example.lahwibu.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,15 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.example.lahwibu.data.response.DataItemSearch
+import com.example.lahwibu.data.response.DataItemCompleted
 import com.example.lahwibu.databinding.CardListAnimeBinding
 
-class SearchListAdapter: ListAdapter<DataItemSearch, SearchListAdapter.MyViewHolder>(DIFF_CALLBACK) {
-    private lateinit var onItemClickCallback: OnItemClickCallback
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+class CompletedListAdapter :
+    ListAdapter<DataItemCompleted, CompletedListAdapter.MyViewHolder>(DIFF_CALLBACK) {
+
+    private lateinit var onItemClickCallback : OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
         this.onItemClickCallback = onItemClickCallback
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
        val binding = CardListAnimeBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return MyViewHolder(binding)
@@ -30,7 +32,7 @@ class SearchListAdapter: ListAdapter<DataItemSearch, SearchListAdapter.MyViewHol
 
     class MyViewHolder(private val binding: CardListAnimeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(anime: DataItemSearch) {
+        fun bind(anime: DataItemCompleted) {
             with(binding) {
                 titleAnime.text = anime.title
                 Glide.with(binding.root)
@@ -41,21 +43,22 @@ class SearchListAdapter: ListAdapter<DataItemSearch, SearchListAdapter.MyViewHol
         }
     }
 
-    interface OnItemClickCallback {
-        fun onItemClicked(data: DataItemSearch)
+    interface OnItemClickCallback{
+        fun onItemClicked(data:DataItemCompleted)
     }
+
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataItemSearch>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataItemCompleted>() {
             override fun areItemsTheSame(
-                oldItem: DataItemSearch,
-                newItem: DataItemSearch
+                oldItem: DataItemCompleted,
+                newItem: DataItemCompleted
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: DataItemSearch,
-                newItem: DataItemSearch
+                oldItem: DataItemCompleted,
+                newItem: DataItemCompleted
             ): Boolean {
                 return oldItem == newItem
             }
@@ -63,6 +66,4 @@ class SearchListAdapter: ListAdapter<DataItemSearch, SearchListAdapter.MyViewHol
     }
 
 
-
 }
-

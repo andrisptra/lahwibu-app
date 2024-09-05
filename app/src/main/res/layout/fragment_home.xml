@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,9 +7,26 @@
     android:background="@color/dark_blue"
     tools:context=".ui.home.HomeFragment">
 
-    <ScrollView
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_blue"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_scrollFlags="enterAlways|snap"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/light_gray" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -18,77 +35,35 @@
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/cover_image"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/carousel_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:contentDescription="@string/cover_image_login"
-                android:scaleType="centerCrop"
+                android:layout_height="196dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                app:carousel_alignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/frieren_image" />
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:background="@drawable/gradient_cover_image"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <Button
-                android:id="@+id/btn_play"
-                android:layout_width="132dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="4dp"
-                android:paddingHorizontal="32dp"
-                android:text="@string/btn_play"
-                app:backgroundTint="@color/orange"
-                app:layout_constraintBottom_toBottomOf="@+id/cover_image"
-                app:layout_constraintStart_toStartOf="@+id/cover_image" />
-
-            <TextView
-                android:id="@+id/title_anime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/anime_title"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/tv_genres"
-                app:layout_constraintStart_toStartOf="@+id/tv_genres" />
-
-            <TextView
-                android:id="@+id/tv_genres"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/genre_list"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/btn_play"
-                app:layout_constraintStart_toStartOf="parent" />
+                tools:listitem="@layout/carousel_item_layout" />
 
             <TextView
                 android:id="@+id/title_ongoing_anime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/title_ongoing_anime"
                 android:textColor="@color/light_gray"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/btn_play"
-                app:layout_constraintTop_toBottomOf="@+id/cover_image" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/carousel_recycler_view" />
 
             <Button
                 android:id="@+id/btn_see_all_ongoing_anime"
@@ -106,24 +81,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="8dp"
                 android:minWidth="300dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/title_ongoing_anime"
                 app:layout_constraintTop_toBottomOf="@+id/title_ongoing_anime" />
-
-            <com.google.android.material.progressindicator.CircularProgressIndicator
-                android:id="@+id/loadingIndicator_ongoing_anime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:visibility="gone"
-                app:indicatorColor="@color/orange"
-                app:layout_constraintBottom_toBottomOf="@+id/rv_anime_list_ongoing"
-                app:layout_constraintEnd_toEndOf="@+id/rv_anime_list_ongoing"
-                app:layout_constraintStart_toStartOf="@+id/rv_anime_list_ongoing"
-                app:layout_constraintTop_toTopOf="@+id/rv_anime_list_ongoing" />
 
             <TextView
                 android:id="@+id/title_completed_anime"
@@ -133,7 +96,7 @@
                 android:text="@string/title_complete_anime"
                 android:textColor="@color/light_gray"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/btn_play"
+                app:layout_constraintStart_toStartOf="@+id/title_ongoing_anime"
                 app:layout_constraintTop_toBottomOf="@+id/rv_anime_list_ongoing" />
 
             <Button
@@ -152,25 +115,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="8dp"
                 android:minWidth="300dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/title_completed_anime"
                 app:layout_constraintTop_toBottomOf="@+id/title_completed_anime" />
-
-            <com.google.android.material.progressindicator.CircularProgressIndicator
-                android:id="@+id/loadingIndicator_completed_anime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="146dp"
-                android:indeterminate="true"
-                android:visibility="gone"
-                app:indicatorColor="@color/orange"
-                app:layout_constraintBottom_toBottomOf="@+id/rv_anime_list_completed"
-                app:layout_constraintEnd_toEndOf="@+id/rv_anime_list_completed"
-                app:layout_constraintStart_toStartOf="@+id/rv_anime_list_completed"
-                app:layout_constraintTop_toTopOf="@+id/rv_anime_list_completed" />
-
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
@@ -179,9 +128,20 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.4" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/loadingIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="visible"
+        app:indicatorColor="@color/aksen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-    </ScrollView>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

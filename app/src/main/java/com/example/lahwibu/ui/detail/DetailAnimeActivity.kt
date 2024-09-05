@@ -2,16 +2,19 @@ package com.example.lahwibu.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.lahwibu.adapter.EpisodeListAdapter
+import com.example.lahwibu.data.response.DetailAnimeResponse
 import com.example.lahwibu.data.response.EpisodeListItem
 import com.example.lahwibu.databinding.ActivityDetailAnimeBinding
 import com.example.lahwibu.ui.episode.EpisodeDetailActivity
 import com.example.lahwibu.utils.Result
 import com.example.lahwibu.utils.ViewModelFactory
+import com.example.lahwibu.viewmodel.DetailAnimeViewModel
 
 class DetailAnimeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailAnimeBinding
@@ -20,15 +23,14 @@ class DetailAnimeActivity : AppCompatActivity() {
     }
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailAnimeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val animeCode = intent.getStringExtra(ANIME_CODE).toString()
         val animeId = intent.getStringExtra(ANIME_ID).toString()
-        Log.e("detailACtv",animeCode)
         getDetailAnime(animeCode, animeId)
+        setBackIconButton()
 
     }
 
@@ -37,42 +39,46 @@ class DetailAnimeActivity : AppCompatActivity() {
             if (result != null) {
                 when (result) {
                     is Result.Loading -> {
-
+                        setLoadingProgress(true)
                     }
 
                     is Result.Success -> {
-                        val animeDetail = result.data
-                        val episodeList = animeDetail.episodeList
-                        with(binding) {
-                            titleAnime.text = animeDetail.title
-                            tvRating.text = animeDetail.score
-                            tvType.text = animeDetail.type
-                            tvStatus.text = animeDetail.status
-                            descSinopsis.text = animeDetail.synopsis
-                            descStudio.text = animeDetail.studio
-
-                            Glide.with(binding.root)
-                                .load(animeDetail.image)
-                                .into(coverImage)
-                        }
-                        setEpisodeList(episodeList)
-
+                        setLoadingProgress(false)
+                        val anime = result.data
+                        setAnimeDetail(anime)
                     }
 
                     is Result.Error -> {
-
+                        setLoadingProgress(false)
                     }
                 }
             }
         }
+    }
 
+    private fun setAnimeDetail(anime: DetailAnimeResponse) {
+        val genre = anime.genres?.joinToString(separator = ", ")
+        binding.topAppBar.title = anime.title
+        with(binding.content) {
+            tvScore.text = anime.score
+            tvRatings.text = anime.ratings
+            tvGenre.text = genre
+            tvType.text = anime.type
+            tvStatus.text = anime.status
+            descSinopsis.text = anime.synopsis
+            descStudio.text = anime.studio
+        }
+        Glide.with(binding.root)
+            .load(anime.image)
+            .into(binding.coverImage)
+        setEpisodeList(anime.episodeList)
     }
 
     private fun setEpisodeList(data: List<EpisodeListItem?>?) {
         val adapter = EpisodeListAdapter()
         adapter.submitList(data)
         val layoutManager = LinearLayoutManager(this)
-        with(binding) {
+        with(binding.content) {
             rvEpisodeList.layoutManager = layoutManager
             rvEpisodeList.adapter = adapter
             rvEpisodeList.isNestedScrollingEnabled = false
@@ -87,8 +93,25 @@ class DetailAnimeActivity : AppCompatActivity() {
                 intent.putExtra(EpisodeDetailActivity.EPS, data.episodeNumber)
                 startActivity(intent)
             }
-
         })
+    }
+
+    private fun setLoadingProgress(loading: Boolean) {
+        if (loading) {
+            binding.content.constraintLayout.visibility = View.GONE
+            binding.loadingIndicator.visibility = View.VISIBLE
+
+        } else {
+            binding.content.constraintLayout.visibility = View.VISIBLE
+            binding.loadingIndicator.visibility = View.GONE
+        }
+
+    }
+
+    private fun setBackIconButton() {
+        binding.materialToolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
 

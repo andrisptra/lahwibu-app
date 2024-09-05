@@ -3,16 +3,21 @@ package com.example.lahwibu.data.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
+import com.example.lahwibu.remotemediator.OngoingRemoteMediator
+import com.example.lahwibu.data.database.LahWibuDatabase
+import com.example.lahwibu.data.response.DataItemCompleted
 import com.example.lahwibu.data.response.DataItemOngoing
 import com.example.lahwibu.data.retrofit.ApiService
-import com.example.lahwibu.utils.AnimeListPagingSource
+import com.example.lahwibu.remotemediator.CompleteRemoteMediator
 import com.example.lahwibu.utils.Result
 
 class UserRepository private constructor(
+    private val database: LahWibuDatabase,
     private val apiService: ApiService
 ) {
 
@@ -33,21 +38,24 @@ class UserRepository private constructor(
 
 
     fun getOngoingAnimeAll(order: String): LiveData<PagingData<DataItemOngoing>> {
+        @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
                 pageSize = 5
             ),
+            remoteMediator = OngoingRemoteMediator(database, apiService, order),
             pagingSourceFactory = {
-                AnimeListPagingSource(apiService, order)
+//                AnimeListPagingSource(apiService, order)
+                database.animeDao().getAllOngoingAnime()
             }
         ).liveData
     }
 
-    fun getCompletedAnime(page: String) = liveData {
+    fun getCompletedAnime(order: String) = liveData {
         emit(Result.Loading)
         try {
-            val successResponse = apiService.getCompletedAnime(page)
-            if (successResponse.data.isNullOrEmpty()) {
+            val successResponse = apiService.getCompletedAnime(order)
+            if (successResponse.data.isEmpty()) {
                 emit(Result.Error("Something went wrong"))
             } else {
                 emit(Result.Success(successResponse))
@@ -55,6 +63,19 @@ class UserRepository private constructor(
         } catch (e: Exception) {
             Log.e(this@UserRepository.toString(), e.message.toString())
         }
+    }
+
+    @OptIn(ExperimentalPagingApi::class)
+    fun getAllCompleteAnime(order: String):LiveData<PagingData<DataItemCompleted>>{
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            remoteMediator = CompleteRemoteMediator(database, apiService, order),
+            pagingSourceFactory = {
+                database.animeDao().getAllCompletedAnime()
+            }
+        ).liveData
     }
 
     fun searchAnime(query: String) = liveData {
@@ -96,10 +117,11 @@ class UserRepository private constructor(
         @Volatile
         private var instance: UserRepository? = null
         fun getInstance(
+            database: LahWibuDatabase,
             apiService: ApiService
         ): UserRepository =
             instance ?: synchronized(this) {
-                instance ?: UserRepository(apiService)
+                instance ?: UserRepository(database, apiService)
             }.also { instance = it }
     }
 }

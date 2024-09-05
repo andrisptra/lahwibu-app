@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/ascending"
+        android:icon="@drawable/baseline_search_24"
+        android:title="@string/ascending"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/descending"
+        android:title="@string/descending"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/updated"
+        android:title="@string/updated"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/most_viewed"
+        android:title="@string/most_viewed"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/popular"
+        android:title="@string/popular"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/latest"
+        android:title="@string/latest"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/oldest"
+        android:title="@string/oldest"
+        app:showAsAction="never" />
+
+</menu>

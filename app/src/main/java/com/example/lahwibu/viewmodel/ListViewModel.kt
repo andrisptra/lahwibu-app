@@ -1,4 +1,4 @@
-package com.example.lahwibu.ui.list
+package com.example.lahwibu.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

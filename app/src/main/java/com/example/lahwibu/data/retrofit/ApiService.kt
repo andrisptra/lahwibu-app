@@ -29,8 +29,14 @@ interface ApiService {
     ): OngoingAnimeResponse
 
     @GET("anime/finished")
+    suspend fun getCompleteAnimeAll(
+        @Query("page") page: Int,
+        @Query("order_by") order: String
+    ): CompletedAnimeResponse
+
+    @GET("anime/finished")
     suspend fun getCompletedAnime(
-        @Query("page") page: String
+        @Query("order_by") order: String
     ): CompletedAnimeResponse
 
     @GET("anime/{code}/{id}")
