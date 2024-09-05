@@ -7,7 +7,7 @@
 <!--        android:state_focused="true" android:state_checked="true"/>-->
 <!--    <item android:color="@macro/m3_comp_navigation_bar_active_hover_icon_color"-->
 <!--        android:state_hovered="true" android:state_checked="true"/>-->
-    <item android:color="@color/orange"
+    <item android:color="@color/aksen"
         android:state_checked="true"/>
 
     <!-- Inactive item -->

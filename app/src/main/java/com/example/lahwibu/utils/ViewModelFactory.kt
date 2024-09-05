@@ -5,11 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.lahwibu.data.di.Injection
 import com.example.lahwibu.data.repository.UserRepository
-import com.example.lahwibu.ui.detail.DetailAnimeViewModel
-import com.example.lahwibu.ui.detaillist.DetailListOngoingViewModel
-import com.example.lahwibu.ui.episode.EpisodeDetailViewModel
-import com.example.lahwibu.ui.home.HomeViewModel
-import com.example.lahwibu.ui.search.SearchViewModel
+import com.example.lahwibu.viewmodel.DetailAnimeViewModel
+import com.example.lahwibu.viewmodel.DetailListCompleteViewModel
+import com.example.lahwibu.viewmodel.DetailListOngoingViewModel
+import com.example.lahwibu.viewmodel.EpisodeDetailViewModel
+import com.example.lahwibu.viewmodel.HomeViewModel
+import com.example.lahwibu.viewmodel.SearchViewModel
 
 class ViewModelFactory private constructor(private val mRepository: UserRepository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -26,7 +27,8 @@ class ViewModelFactory private constructor(private val mRepository: UserReposito
             EpisodeDetailViewModel(mRepository) as T
         } else if (modelClass.isAssignableFrom(DetailListOngoingViewModel::class.java)) {
             DetailListOngoingViewModel(mRepository) as T
-
+        } else if (modelClass.isAssignableFrom(DetailListCompleteViewModel::class.java)) {
+            DetailListCompleteViewModel(mRepository) as T
         } else {
             throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

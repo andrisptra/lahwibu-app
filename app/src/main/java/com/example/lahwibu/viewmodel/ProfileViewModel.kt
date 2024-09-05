@@ -1,4 +1,4 @@
-package com.example.lahwibu.ui.profile
+package com.example.lahwibu.viewmodel
 
 import androidx.lifecycle.ViewModel
 

@@ -1,4 +1,4 @@
-package com.example.lahwibu.ui.detail
+package com.example.lahwibu.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

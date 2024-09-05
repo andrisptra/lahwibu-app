@@ -1,4 +1,4 @@
-package com.example.lahwibu.ui.detail
+package com.example.lahwibu.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.example.lahwibu.data.repository.UserRepository

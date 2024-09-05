@@ -9,11 +9,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.lahwibu.adapter.SearchListAdapter
 import com.example.lahwibu.data.response.DataItemSearch
 import com.example.lahwibu.databinding.FragmentSearchBinding
 import com.example.lahwibu.ui.detail.DetailAnimeActivity
 import com.example.lahwibu.utils.Result
 import com.example.lahwibu.utils.ViewModelFactory
+import com.example.lahwibu.viewmodel.SearchViewModel
 
 class SearchFragment : Fragment() {
 

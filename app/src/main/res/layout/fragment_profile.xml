@@ -4,24 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark_blue"
     tools:context=".ui.profile.ProfileFragment">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
-
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/light_blue"
-        android:textColor="@color/dark_gray"
-        android:text="@string/btn_logout"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
+    <ImageView
+        android:id="@+id/userProfile"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="32dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        tools:text="@string/app_name"
+        android:textColor="@color/light_gray"
+        app:layout_constraintEnd_toEndOf="@+id/userProfile"
+        app:layout_constraintStart_toStartOf="@+id/userProfile"
+        app:layout_constraintTop_toBottomOf="@+id/userProfile" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_logout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/light_blue"
+        android:text="@string/btn_logout"
+        android:textColor="@color/dark_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

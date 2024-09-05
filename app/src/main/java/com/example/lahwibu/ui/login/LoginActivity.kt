@@ -2,7 +2,6 @@ package com.example.lahwibu.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.service.credentials.BeginCreateCredentialRequest
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.credentials.CredentialManager
@@ -11,10 +10,9 @@ import androidx.credentials.GetCredentialRequest
 import androidx.credentials.GetCredentialResponse
 import androidx.credentials.exceptions.GetCredentialException
 import androidx.lifecycle.lifecycleScope
-import com.example.lahwibu.MainActivity
+import com.example.lahwibu.ui.MainActivity
 import com.example.lahwibu.R
 import com.example.lahwibu.databinding.ActivityLoginBinding
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.firebase.Firebase
@@ -35,12 +33,12 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth
         binding.btnLoginGoogle.setOnClickListener {
-            signIn()
+            signInWithGoogle()
         }
 
     }
 
-    private fun signIn() {
+    private fun signInWithGoogle() {
         val credentialManager = CredentialManager.create(this)
         val googleIdOption = GetGoogleIdOption.Builder()
             .setFilterByAuthorizedAccounts(false)
@@ -56,14 +54,14 @@ class LoginActivity : AppCompatActivity() {
                     request = request,
                     context = this@LoginActivity,
                 )
-                handleSignIn(result)
+                handleSignInWithGoogle(result)
             } catch (e: GetCredentialException) {
                 Log.d("Error", e.message.toString())
             }
         }
     }
 
-    private fun handleSignIn(result: GetCredentialResponse) {
+    private fun handleSignInWithGoogle(result: GetCredentialResponse) {
         when (val credential = result.credential) {
             is CustomCredential -> {
                 if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
@@ -98,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(currentUser: FirebaseUser?){
         if (currentUser!=null){
-            startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
         }
     }

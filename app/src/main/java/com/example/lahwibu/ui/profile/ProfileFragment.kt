@@ -10,8 +10,10 @@ import androidx.credentials.CredentialManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.lahwibu.databinding.FragmentProfileBinding
 import com.example.lahwibu.ui.login.LoginActivity
+import com.example.lahwibu.viewmodel.ProfileViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -35,10 +37,13 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
         auth = Firebase.auth
+
         binding.btnLogout.setOnClickListener {
             signOut()
         }
+        setProfileUser()
     }
 
     private fun signOut() {
@@ -54,10 +59,18 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun setProfileUser(){
+        val user = auth.currentUser
+        user?.let {
+            with(binding){
+                userName.text = it.displayName
+                Glide.with(binding.root)
+                    .load(it.photoUrl)
+                    .circleCrop()
+                    .into(userProfile)
+
+            }
+        }
     }
 
     companion object {
